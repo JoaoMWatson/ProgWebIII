@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CardProjeto from "./components/cadProjeto";
 import "./App.css";
 
 class App extends Component {
@@ -9,13 +10,12 @@ class App extends Component {
     };
   }
 
-
-  componentDidMount(){
+  componentDidMount() {
     fetch("http://localhost:8080/api/projetos")
-    .then(res => res.json())
-    .then((result) => {
-      this.setState({lista: result.data})
-    });
+      .then(res => res.json())
+      .then(result => {
+        this.setState({ lista: result.data });
+      });
   }
 
   render() {
@@ -39,28 +39,12 @@ class App extends Component {
           <div class="ui stackable container three column grid">
             {this.state.lista.map(function(projeto) {
               return (
-                <div class="column">
-                  <div class="ui card">
-                    <div class="image">
-                      <img src="logo.svg" />
-                    </div>
-                    <div class="content">
-                      <div class="header"> {projeto.nome} </div>
-                      <div class="meta">
-                        <span class="date">{projeto.usuario}</span>
-                      </div>
-                      <div class="description">
-                        {projeto.descricao}
-                      </div>
-                    </div>
-                    <div class="extra content">
-                      <a>
-                        <i aria-hidden="true" class="like icon"></i>
-                        {projeto.likes} Likes
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                <CardProjeto
+                  nome={projeto.nome}
+                  descricao={projeto.descricao}
+                  usuario={projeto.usuario}
+                  likes={projeto.likes}
+                />
               );
             })}
           </div>
