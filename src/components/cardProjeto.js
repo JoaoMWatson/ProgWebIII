@@ -2,6 +2,33 @@ import React, { Component } from "react";
 import "./cards.css";
 
 class CardProjeto extends Component {
+  constructor() {
+    super();
+    this.state = { likes: 0 };
+    this.addLike = this.addLike.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      likes: this.props.likes
+    });
+  }
+
+  addLike() {
+    let likes = parseInt(this.state.likes) + 1;
+    fetch("http://localhost:8080/api/projetos/" + this.props.id, {
+      method: "PUT",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ likes: likes })
+    })
+      .then(result => result.json())
+      .then(
+        function(result) {
+          this.setState({ likes: result.likes });
+        }.bind(this)
+      );
+  }
+
   render() {
     return (
       <div class="column">
@@ -16,18 +43,20 @@ class CardProjeto extends Component {
             <div class="header">{this.props.nome}</div>
             <div class="description">{this.props.descricao}</div>
           </div>
-          <div class="extra content">
-            <div class="right floated">
-              <a>
-                <i aria-hidden="true" class="like outline icon"></i>
-                {this.props.likes} Likes
-              </a>
-            </div>
-            <a>
+          <div class="content">
+            <span>
               <i aria-hidden="true" class="icon comment"></i>
-              {/* {this.props.likes}  */}
               10 Comentarios
-            </a>
+            </span>
+
+            <span
+              href="/"
+              class="right floated "
+              onClick={this.addLike}
+            >
+              <i aria-hidden="true" class="heart icon"></i>
+              {this.state.likes} likes
+            </span>
           </div>
 
           <div class="extra content">
