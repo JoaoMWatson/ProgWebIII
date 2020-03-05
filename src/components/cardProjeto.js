@@ -27,6 +27,7 @@ class CardProjeto extends Component {
           this.setState({ likes: result.likes });
         }.bind(this)
       );
+      console.log("aaa")
   }
 
   render() {
@@ -37,7 +38,7 @@ class CardProjeto extends Component {
             <div class="header">{this.props.usuario}</div>
           </div>
           <div class="image espacinho">
-            <img src="https://visualpharm.com/assets/387/Person-595b40b75ba036ed117da139.svg" />
+            <img src="https://visualpharm.com/assets/387/Person-595b40b75ba036ed117da139.svg"/>
           </div>
           <div class="content">
             <div class="header">{this.props.nome}</div>
@@ -54,7 +55,7 @@ class CardProjeto extends Component {
               class="right floated "
               onClick={this.addLike}
             >
-              <i aria-hidden="true" class="heart icon"></i>
+              <i aria-hidden="true" class="heart icon botao-like"></i>
               {this.state.likes} likes
             </span>
           </div>

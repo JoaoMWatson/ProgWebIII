@@ -1,3 +1,7 @@
 .espacinho{
     margin: 10px;
 }
+
+.botao-like{
+    cursor: pointer;
+}

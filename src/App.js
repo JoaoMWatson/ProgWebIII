@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CardProjeto from "./components/cardProjeto";
 import "./App.css";
+import NewProjectModal from "./components/newProjectModal";
 
 class App extends Component {
   constructor() {
@@ -8,6 +9,7 @@ class App extends Component {
     this.state = {
       lista: []
     };
+    this.inserirProjeto = this.inserirProjeto.bind(this)
   }
 
   componentDidMount() {
@@ -18,13 +20,17 @@ class App extends Component {
       });
   }
 
+  inserirProjeto = projeto => this.setState({lista: [...this.state.lista, projeto]})
+  
+
   render() {
     return (
       <>
         <div class="ui menu inverted">
           <h2 class="ui header item">ClaudioFundais</h2>
           <span class="item">
-            <button class="ui animated blue basic inverted button ">
+            <NewProjectModal inserirProjeto={this.inserirProjeto} />
+            <button class="ui animated blue basic inverted button">
               <span class="visible content">Criar Projeto</span>
               <span class="hidden content">
                 <i aria-hidden="true" class="arrow right icon"></i>
@@ -40,6 +46,7 @@ class App extends Component {
             {this.state.lista.map(function(projeto) {
               return (
                 <CardProjeto
+                  id={projeto.id}
                   nome={projeto.nome}
                   descricao={projeto.descricao}
                   usuario={projeto.usuario}
