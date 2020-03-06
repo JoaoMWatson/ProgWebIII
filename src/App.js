@@ -30,12 +30,6 @@ class App extends Component {
           <h2 class="ui header item">ClaudioFundais</h2>
           <span class="item">
             <NewProjectModal inserirProjeto={this.inserirProjeto} />
-            <button class="ui animated blue basic inverted button">
-              <span class="visible content">Criar Projeto</span>
-              <span class="hidden content">
-                <i aria-hidden="true" class="arrow right icon"></i>
-              </span>
-            </button>
           </span>
           <div class="ui inverted input item right">
             <input type="text" placeholder="Procurar..." />

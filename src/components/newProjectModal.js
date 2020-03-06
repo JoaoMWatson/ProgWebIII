@@ -13,16 +13,26 @@ class NewProjectModal extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputChange = ({target}) => this.setState({ [target.name]: target.value})
+  handleInputChange = ({ target }) =>
+    this.setState({ [target.name]: target.value });
 
-  handleSubmit(evento){
+  handleSubmit(evento) {
     evento.preventDefault();
-    this.props.inserirProjeto(this.state)
+    this.props.inserirProjeto(this.state);
   }
 
   render() {
     return (
-      <Modal>
+      <Modal
+        trigger={
+          <button class="ui animated blue basic inverted button">
+            <span class="visible content">Criar Projeto</span>
+            <span class="hidden content">
+              <i aria-hidden="true" class="arrow right icon"></i>
+            </span>
+          </button>
+        }
+      >
         <Modal.Header>Crie seu projeto!!</Modal.Header>
         <Modal.Content>
           <Form onSubmit={this.hanldeSubmit}>
@@ -44,7 +54,9 @@ class NewProjectModal extends Component {
               onChange={this.handleInputChange}
               label="Descrição do projeto"
             />
-            <Button></Button>
+            <Button primary type="submit">
+              Criar Projeto
+            </Button>
           </Form>
         </Modal.Content>
       </Modal>
