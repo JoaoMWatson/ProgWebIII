@@ -16,9 +16,10 @@ class NewProjectModal extends Component {
   handleInputChange = ({ target }) =>
     this.setState({ [target.name]: target.value });
 
-  handleSubmit(evento) {
-    evento.preventDefault();
-    this.props.inserirProjeto(this.state);
+  handleSubmit = evento => {
+    evento.preventDefault()
+    this.props.inserirProjeto(this.state)
+    this.setState({modalOpen: false})
   }
 
   render() {
@@ -32,6 +33,8 @@ class NewProjectModal extends Component {
             </span>
           </button>
         }
+        onClose={this.handleClose}
+        open={this.state.modalOpen}
       >
         <Modal.Header>Crie seu projeto!!</Modal.Header>
         <Modal.Content>
@@ -54,7 +57,7 @@ class NewProjectModal extends Component {
               onChange={this.handleInputChange}
               label="Descrição do projeto"
             />
-            <Button primary type="submit">
+            <Button primary onClick={this.handleSubmit} type="submit">
               Criar Projeto
             </Button>
           </Form>

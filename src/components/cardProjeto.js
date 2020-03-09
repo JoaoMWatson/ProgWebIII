@@ -27,7 +27,6 @@ class CardProjeto extends Component {
           this.setState({ likes: result.likes });
         }.bind(this)
       );
-      console.log("aaa")
   }
 
   render() {

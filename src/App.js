@@ -20,7 +20,19 @@ class App extends Component {
       });
   }
 
-  inserirProjeto = projeto => this.setState({lista: [...this.state.lista, projeto]})
+  inserirProjeto(projeto) {
+    fetch("http://localhost:8080/api/projetos",{
+      method: "POST",
+      headers: { "Context-type": "application/json"},
+      body: JSON.stringify({projeto: projeto})
+    })
+    .then(res => res.json())
+    .then(result => {
+      this.setState({lista: projeto.data})
+    })
+  }
+
+  // inserirProjeto = projeto => this.setState({lista: [...this.state.lista, projeto]})
   
 
   render() {
