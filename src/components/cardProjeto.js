@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./cards.css";
+import api from "../api";
 
 class CardProjeto extends Component {
   constructor() {
@@ -15,18 +16,22 @@ class CardProjeto extends Component {
   }
 
   addLike() {
-    let likes = parseInt(this.state.likes) + 1;
-    fetch("http://localhost:8080/api/projetos/" + this.props.id, {
-      method: "PUT",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ likes: likes })
-    })
-      .then(result => result.json())
-      .then(
-        function(result) {
-          this.setState({ likes: result.likes });
-        }.bind(this)
-      );
+    let novo_likes = parseInt(this.state.likes) + 1;
+    api.put(
+      `projetos/${this.props.id}`, JSON.stringify({likes:novo_likes})
+    )
+    .then( () => this.setState({ likes: novo_likes }) )
+  }
+
+  handleKeyDown(event){
+    if(event.key === 'Enter') {
+      api.post(
+        `projeto/${this.props.id}/comentario`,
+        { comentario: this.state.comentario }
+      )
+      .then(() => this.setState(
+        { qtde_comentarios: this.state.qtde_comentarios + 1} ))
+    }
   }
 
   render() {

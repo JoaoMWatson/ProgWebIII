@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CardProjeto from "./components/cardProjeto";
 import "./App.css";
 import NewProjectModal from "./components/newProjectModal";
+import api from "./api";
 
 class App extends Component {
   constructor() {
@@ -20,16 +21,24 @@ class App extends Component {
       });
   }
 
+  // inserirProjeto(projeto) {
+  //   fetch("http://localhost:8080/api/projetos",{
+  //     method: "POST",
+  //     headers: { "Content-type": "application/json"},
+  //     body: JSON.stringify({ projeto: projeto })
+  //   })
+  //   .then(res => res.json())
+  //   .then(result => {
+  //     this.setState({lista: result.data})
+  //   })
+  // }
+
   inserirProjeto(projeto) {
-    fetch("http://localhost:8080/api/projetos",{
-      method: "POST",
-      headers: { "Context-type": "application/json"},
-      body: JSON.stringify({projeto: projeto})
-    })
-    .then(res => res.json())
-    .then(result => {
-      this.setState({lista: projeto.data})
-    })
+    let data = JSON.stringify({projeto: projeto});
+    api.post(
+      'projeto', data
+    )
+    .then( () => this.setState({lista: [...data]}) )
   }
 
   // inserirProjeto = projeto => this.setState({lista: [...this.state.lista, projeto]})
